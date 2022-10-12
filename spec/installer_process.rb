@@ -67,8 +67,8 @@ class InstallerProcess
     # @process.io.stdin.write_nonblock(text + "\n")
   end
 
-  def get(*args)
-    @last_get_return = _get(*args)
+  def get(text, **args)
+    @last_get_return = _get(text, **args)
   end
 
   private
