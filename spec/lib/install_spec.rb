@@ -55,28 +55,28 @@ RSpec.describe RedmineInstaller::Install, command: 'install' do
     write(@redmine_root)
 
     expected_output('Path to package:')
-    write(package_v345)
+    write(package_v503)
 
     expected_output('Extracting redmine package')
 
     expected_successful_configuration(email: true)
     expected_successful_installation
 
-    expected_redmine_version('3.4.5')
+    expected_redmine_version('5.0.3')
     expected_email_configuration
   end
 
-  it 'download redmine', args: ['v3.4.5'] do
+  it 'download redmine', args: ['v5.0.3'] do
     expected_output('Path to redmine root:')
     write(@redmine_root)
 
-    expected_output_in('Downloading http://www.redmine.org/releases/redmine-3.4.5.zip', 30)
+    expected_output_in('Downloading https://www.redmine.org/releases/redmine-5.0.3.zip', 30)
     expected_output('Extracting redmine package')
 
     expected_successful_configuration
     expected_successful_installation
 
-    expected_redmine_version('3.4.5')
+    expected_redmine_version('5.0.3')
   end
 
   it 'installing something else', args: [package_someting_else] do
@@ -85,7 +85,7 @@ RSpec.describe RedmineInstaller::Install, command: 'install' do
     expected_output('is not valid')
   end
 
-  it 'bad database settings', args: [package_v345] do
+  it 'bad database settings', args: [package_v503] do
     write(@redmine_root)
 
     expected_output('Creating database configuration')
@@ -129,7 +129,7 @@ RSpec.describe RedmineInstaller::Install, command: 'install' do
     expected_output('--> Database migrating')
     expected_output_in('Redmine was installed', 60)
 
-    expected_redmine_version('3.4.5')
+    expected_redmine_version('5.0.3')
   end
 
   it 'high installer version', args: [package_high_installer_version] do
