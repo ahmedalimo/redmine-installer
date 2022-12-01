@@ -30,12 +30,12 @@ RSpec.configure do |config|
 
   config.before(:all, :install_first) do
     @redmine_root = @origin_redmine = Dir.mktmpdir('redmine_root')
-    @process = InstallerProcess.new('install', package_v345, @origin_redmine)
+    @process = InstallerProcess.new('install', package_v503, @origin_redmine)
     @process.run do
       expected_successful_configuration
       expected_successful_installation
 
-      expected_redmine_version('3.4.5')
+      expected_redmine_version('5.0.3')
     end
     @backup_dir = Dir.mktmpdir('backup_dir')
   end
