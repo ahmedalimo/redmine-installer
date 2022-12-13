@@ -1,5 +1,18 @@
 # Changelog
 
+
+## [3.0.0] - 2022-12-13
+### Added
+- docker-compose for testing [#37](https://github.com/easyredmine/redmine-installer/pull/37)
+- .github workflow for CI
+- `env_check` for test server environment
+### Fixed
+- ruby 3.x support [#35](https://github.com/easyredmine/redmine-installer/pull/35)
+- Psych aliases while parsing `database.yml`
+### Changed
+- required ruby version = 3.1.2 [#36](https://github.com/easyredmine/redmine-installer/pull/36)
+- required redmine version = 5.0.4+ [#36](https://github.com/easyredmine/redmine-installer/pull/36)
+
 ## [2.4.0] - 2022-09-07
 ### Added
 - allow the administrator to manually empty the root directory [#33](https://github.com/easyredmine/redmine-installer/pull/33)

@@ -51,7 +51,7 @@ RSpec.describe RedmineInstaller::Upgrade, :install_first, command: 'upgrade' do
     last_backup = Dir.glob(File.join(@backup_dir, '*')).sort.last
     backuped = Dir.glob(File.join(last_backup, '*'))
 
-    expect(backuped.map{|f| File.zero?(f) }).to all(be_falsey)
+    expect(backuped.map { |f| File.zero?(f) }).to all(be_falsey)
   end
 
   it 'upgrade with no backup and files keeping', args: ['--keep', 'test_test'] do
@@ -87,7 +87,7 @@ RSpec.describe RedmineInstaller::Upgrade, :install_first, command: 'upgrade' do
 
   it 'copy files with symlink ', args: ['--copy-files-with-symlink'] do
     files_dir = File.join(@redmine_root, 'files')
-    files = (0..10).map {|i| File.join(files_dir, "file_#{i}.txt") }
+    files = (0..10).map { |i| File.join(files_dir, "file_#{i}.txt") }
     FileUtils.touch(files)
 
     wait_for_stdin_buffer
@@ -136,7 +136,7 @@ RSpec.describe RedmineInstaller::Upgrade, :install_first, command: 'upgrade' do
 
     expected_redmine_version('3.4.5')
 
-    index = YAML.load_file(File.join(@redmine_root, '.bundle/plugin/index'))
+    index = YAML.load_file(File.join(@redmine_root, '.bundle/plugin/index'), aliases: true)
 
     load_paths = index['load_paths']['rys-bundler']
     expect(load_paths.size).to eq(1)

@@ -7,14 +7,26 @@ module RedmineInstaller
       end
 
       if Gem::Version.new(RUBY_VERSION) < Gem::Version.new(RedmineInstaller::MIN_SUPPORTED_RUBY)
-        error "You are using unsupported ruby. Please install at least #{RedmineInstaller::MIN_SUPPORTED_RUBY}."
+        error "You are using unsupported ruby. Please install ruby v#{RedmineInstaller::MIN_SUPPORTED_RUBY}."
       end
 
-      logger.info 'Environemnt checked'
+      if mysql_version =~ /^mysql\s+Ver\s(8\.\d)/
+        puts pastel.on_red 'WARNING: It seems you are using MySQL 8.x, but ER / EP supported only Percona 8 db.'
+      else
+        error 'Only Percona 8.x db server is supported!.'
+      end
+
+      logger.info 'Environment checked'
     end
 
     def user_is_root?
       Process.euid == 0
+    end
+
+    def mysql_version
+      `mysql --version`
+    rescue StandardError
+      ""
     end
 
   end

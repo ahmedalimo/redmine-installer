@@ -2,7 +2,7 @@ require 'spec_helper'
 
 RSpec.describe RedmineInstaller::Install, command: 'install' do
 
-  it 'unreadable file', args: [] do
+  it 'unreadable file', args: [], skip: "because redmine docker run under root" do
     FileUtils.chmod(0000, @redmine_root)
 
     expected_output('Path to redmine root:')
@@ -13,7 +13,7 @@ RSpec.describe RedmineInstaller::Install, command: 'install' do
     FileUtils.chmod(0600, @redmine_root)
   end
 
-  it 'unwritable directory', args: [] do
+  it 'unwritable directory', args: [], skip: "because redmine docker run under root" do
     directory = File.join(@redmine_root, 'directory')
     subdirectory = File.join(directory, 'subdirectory')
 
@@ -28,7 +28,7 @@ RSpec.describe RedmineInstaller::Install, command: 'install' do
     FileUtils.chmod(0700, directory)
   end
 
-  it 'non-existinig package', args: [] do
+  it 'non-exising package', args: [] do
     this_file = File.expand_path(File.join(File.dirname(__FILE__)))
 
     expected_output('Path to redmine root:')
@@ -40,7 +40,7 @@ RSpec.describe RedmineInstaller::Install, command: 'install' do
     expected_output("File #{this_file} must have format: .zip, .gz, .tgz")
   end
 
-  it 'non-existinig zip package', args: [] do
+  it 'non-existing zip package', args: [] do
     expected_output('Path to redmine root:')
     write(@redmine_root)
 
@@ -89,9 +89,8 @@ RSpec.describe RedmineInstaller::Install, command: 'install' do
     write(@redmine_root)
 
     expected_output('Creating database configuration')
-    go_down
-    expected_output('‣ PostgreSQL')
-    write('')
+    expected_output('‣ MySQL')
+    select_choice
 
     write('test')
     write('')
@@ -105,7 +104,7 @@ RSpec.describe RedmineInstaller::Install, command: 'install' do
     write('')
 
     expected_output('Redmine installing')
-    expected_output_in('--> Database migrating', 60)
+    expected_output_in('--> Database migrating', 360)
     expected_output('Migration end with error')
     expected_output('‣ Try again')
 
@@ -114,12 +113,11 @@ RSpec.describe RedmineInstaller::Install, command: 'install' do
     expected_output('‣ Change database configuration')
     write('')
 
-    go_down
-    expected_output('‣ PostgreSQL')
+    expected_output('‣ MySQL')
     write('')
 
-    write('test')
-    write('')
+    write(ENV.fetch('MYSQL_DATABASE', 'test'))
+    write(ENV['DB_HOST'].to_s)
     write(db_username)
     sleep 0.5 # wait for buffer
     write(db_password)
@@ -127,7 +125,7 @@ RSpec.describe RedmineInstaller::Install, command: 'install' do
     write('')
 
     expected_output('--> Database migrating')
-    expected_output_in('Redmine was installed', 60)
+    expected_output_in('Redmine was installed', 360)
 
     expected_redmine_version('5.0.3')
   end
@@ -137,7 +135,7 @@ RSpec.describe RedmineInstaller::Install, command: 'install' do
     expected_output('You are using an old version of installer')
   end
 
-  it 'download redmine', args: [package_default_db] do
+  it 'download redmine', args: [package_default_db], skip: "Only redmine 5.x is supported" do
     expected_output('Path to redmine root:')
     write(@redmine_root)
 
@@ -155,7 +153,7 @@ RSpec.describe RedmineInstaller::Install, command: 'install' do
     expected_redmine_version('3.4.5')
 
     Dir.chdir(@redmine_root) do
-      out = `rails runner "puts Issue.count"`.strip
+      out = `bundle exec rails runner "puts Issue.count"`.strip
       expect($?.success?).to be_truthy
       expect(out).to eq('3')
     end

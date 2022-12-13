@@ -305,7 +305,7 @@ module RedmineInstaller
         bundle_index = File.join(Dir.pwd, '.bundle/plugin/index')
 
         if File.exist?(bundle_index)
-          index = YAML.load_file(bundle_index)
+          index = YAML.load_file(bundle_index, aliases: true)
 
           # { load_paths: { PLUGIN_NAME: *PATHS } }
           #

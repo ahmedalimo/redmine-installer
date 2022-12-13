@@ -74,7 +74,7 @@ class InstallerProcess
   private
 
   # max_wait in s
-  def _get(text, max_wait: 10)
+  def _get(text, max_wait: 180)
     wait_to = Time.now + max_wait
     while Time.now < wait_to
       @buffer << @stdout.read
