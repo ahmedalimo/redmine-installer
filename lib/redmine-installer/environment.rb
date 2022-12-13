@@ -11,7 +11,9 @@ module RedmineInstaller
       end
 
       if mysql_version =~ /^mysql\s+Ver\s(8\.\d)/
-        puts pastel.on_red 'WARNING: It seems you are using MySQL 8.x, but ER / EP supported only Percona 8 db.'
+        unless mysql_version.include? "Percona"
+          puts pastel.on_red 'WARNING: It seems you are using MySQL 8.x, but ER / EP supported only Percona 8 db.'
+        end
       else
         error 'Only Percona 8.x db server is supported!.'
       end

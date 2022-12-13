@@ -1,6 +1,9 @@
 # Changelog
 
 
+## [3.0.1] - 2022-12-14
+### Fixed
+- do not show warning if Percona
 ## [3.0.0] - 2022-12-13
 ### Added
 - docker-compose for testing [#37](https://github.com/easyredmine/redmine-installer/pull/37)
