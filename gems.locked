@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    redmine-installer (3.0.1)
+    redmine-installer (3.0.2)
       bundler (>= 2.3.7)
       commander
       pastel (~> 0.8.0)

@@ -1,6 +1,9 @@
 # Changelog
 
 
+## [3.0.2] - 2023-01-02
+### Fixed
+- with rubygems < 3.3.12 unable to install gem [#40](https://github.com/easyredmine/redmine-installer/issues/40)
 ## [3.0.1] - 2022-12-14
 ### Fixed
 - do not show warning if Percona
