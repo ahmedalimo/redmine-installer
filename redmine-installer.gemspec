@@ -12,6 +12,11 @@ Gem::Specification.new do |spec|
   spec.description = %q{}
   spec.homepage = 'https://github.com/easyredmine/redmine-installer'
   spec.license = 'MIT'
+  spec.metadata = {
+    "source_code_uri" => "https://github.com/easyredmine/redmine-installer",
+    "changelog_uri" => "https://github.com/easyredmine/redmine-installer/blob/master/CHANGELOG.md",
+  }
+  # spec.required_rubygems_version = '>= 3.3.12'
 
   files = `git ls-files -z`.split("\x0") - Dir.glob("{spec/**/*,docker-compose.yml,.github/**/*}")
   spec.files = files
@@ -19,7 +24,7 @@ Gem::Specification.new do |spec|
   spec.test_files = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ['lib']
 
-  spec.required_ruby_version = '~> 3.1.2.0'
+  spec.required_ruby_version = '>= 3.1.2', '< 3.1.3'
 
   spec.add_runtime_dependency 'bundler', '>= 2.3.7'
   spec.add_runtime_dependency 'commander'

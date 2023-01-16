@@ -1,6 +1,9 @@
 # Changelog
 
 
+## [3.0.3] - 2023-01-16
+### Fixed
+- rubygems < 3.3.12 still unable to install gem on some machines, try another way to define ruby dependency [#40](https://github.com/easyredmine/redmine-installer/issues/40)
 ## [3.0.2] - 2023-01-02
 ### Fixed
 - with rubygems < 3.3.12 unable to install gem [#40](https://github.com/easyredmine/redmine-installer/issues/40)

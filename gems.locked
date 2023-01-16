@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    redmine-installer (3.0.2)
+    redmine-installer (3.0.3)
       bundler (>= 2.3.7)
       commander
       pastel (~> 0.8.0)
@@ -58,7 +58,7 @@ GEM
     tty-screen (0.8.1)
     tty-spinner (0.8.0)
       tty-cursor (>= 0.5.0)
-    unicode-display_width (2.3.0)
+    unicode-display_width (2.4.2)
     wisper (2.0.1)
 
 PLATFORMS
